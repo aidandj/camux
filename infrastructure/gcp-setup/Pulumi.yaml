@@ -1,0 +1,3 @@
+name: camux
+runtime: go
+description: Infrastructure setup for Google Home Camera Viewer application

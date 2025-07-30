@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.env
+.env.local
+.DS_Store
+*.log
+.vscode/
+.idea/
+build/
+coverage/
+.cache/
+.pulumi/
+infrastructure/gcp-setup/secrets/*
+infrastructure/gcp-setup/Pulumi.dev.yaml

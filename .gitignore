@@ -12,3 +12,4 @@ coverage/
 .pulumi/
 infrastructure/gcp-setup/secrets/*
 infrastructure/gcp-setup/Pulumi.dev.yaml
+server/sessions

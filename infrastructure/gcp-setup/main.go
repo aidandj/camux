@@ -107,7 +107,7 @@ Manual steps required:
    - Go to https://console.cloud.google.com/apis/credentials
    - Click "Create Credentials" > "OAuth client ID"
    - Application type: Web application
-   - Add authorized redirect URI: http://localhost:5000/api/auth/callback
+   - Add authorized redirect URI: http://localhost:6001/api/auth/callback
    - Save the Client ID and Client Secret
 
 3. Create Device Access Project:

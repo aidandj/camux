@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./
+      dockerfile: ./server/Dockerfile
+      x-bake:
+        platforms:
+          - linux/amd64
+          - linux/arm64
+    image: ghcr.io/aidandj/camux/backend:latest
+    container_name: camux-backend
+    environment:
+      - PORT=6001
+      - NODE_ENV=development
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - GOOGLE_PROJECT_ID=${GOOGLE_PROJECT_ID}
+      - SESSION_SECRET=${SESSION_SECRET}
+      - FRONTEND_URL=http://localhost:3000
+      - GOOGLE_REDIRECT_URI=http://localhost:6001/api/auth/callback
+    ports:
+      - "6001:6001"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6001/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - camux-network
+    volumes:
+      - ${PWD}:/data
+
+  frontend:
+    build:
+      context: ./
+      dockerfile: ./client/Dockerfile
+      x-bake:
+        platforms:
+          - linux/amd64
+          - linux/arm64
+    image: ghcr.io/aidandj/camux/frontend:latest
+    container_name: camux-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - camux-network
+
+networks:
+  camux-network:
+    driver: bridge

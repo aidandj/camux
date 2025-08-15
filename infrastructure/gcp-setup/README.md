@@ -86,7 +86,7 @@ After running the Pulumi deployment, you'll need to complete these manual steps:
    - Visit [API Credentials](https://console.cloud.google.com/apis/credentials)
    - Click "Create Credentials" > "OAuth client ID"
    - Choose "Web application"
-   - Add redirect URI: `http://localhost:5000/api/auth/callback`
+   - Add redirect URI: `http://localhost:6001/api/auth/callback`
    - Save the Client ID and Secret
 
 3. **Create Device Access Project**:
